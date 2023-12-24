@@ -197,6 +197,8 @@ void handle_client_request(int fd, struct pollfd *fds, int i,
   }
 
   char *request_buffer = buffer;
+   
+  printf("REQUEST: %s\n", request_buffer);
 
   char *method = strsep(&request_buffer, " ");
   char *url = strsep(&request_buffer, " ");
@@ -205,7 +207,8 @@ void handle_client_request(int fd, struct pollfd *fds, int i,
   ssize_t bytes_sent;
   size_t file_size;
   const char *file_result = get_response(url, &file_size);
-
+  
+  printf("RESPONSE: %s\n", file_result);
   bytes_sent = send(fds[i].fd, file_result, strlen(file_result) + file_size, 0);
   free((void *)file_result);
 
