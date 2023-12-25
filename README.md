@@ -56,7 +56,7 @@ Before running the server, ensure you have `git` and `make` installed on your ma
   Or replace `8008` with the port number specified in `port.txt` if you have changed it.
 
 The resulting page should show up in your browser:
-![Screenshot 2023-12-25 at 2.48.49 PM.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fmd%2Fzhpqm6md1rn8yyjccp6vbnnm0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_plezaX%2FScreenshot%202023-12-25%20at%202.48.49%E2%80%AFPM.png)
+![./image.png(./image.png)]
 
 ### Customizing the Page
 
