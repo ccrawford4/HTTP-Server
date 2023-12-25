@@ -56,7 +56,7 @@ Before running the server, ensure you have `git` and `make` installed on your ma
   Or replace `8008` with the port number specified in `port.txt` if you have changed it.
 
 The resulting page should show up in your browser:
-![./image.png(./image.png)]
+![Example HomePage](image.png)
 
 ### Customizing the Page
 
