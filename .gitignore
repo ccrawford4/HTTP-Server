@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Output File
+server
+
 # Object files
 *.o
 *.ko
