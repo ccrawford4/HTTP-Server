@@ -83,19 +83,15 @@ char *read_file(size_t *file_size, char *url, bool *valid_response) {
   stream = fopen(file_path, "rb");
 
   if (stream == NULL) {
-      printf("invalid path\n");
-      printf("file_path: %s\n", file_path);
     *valid_response = false;
     stream = fopen("./www/404.html", "rb");
     // Redirect the file to the 404 page if the dir/file does not exist
   }
 
-  printf("test 2\n");
   fseek(stream, 0, SEEK_END);
 
   *file_size = ftell(stream);
 
-  printf("test 3\n");
   char *file_content = (char *)malloc(*file_size);
   if (file_content == NULL) {
     perror("memory allocation()");
@@ -154,14 +150,6 @@ char *create_header(size_t *file_size, char *url, bool *valid_response) {
                "HTTP/1.1 %s\r\nContent-Type: %s\r\nContent-Length: %zu\r\n\r\n",
                http_code, content_type, *file_size);
 
-  printf("HEADER: %s\n", header);
- /* if (result < 0 || result >= 50 + *file_size / 10) {
-    printf("Damaged response header: %s\n", header);
-    perror("error creating header");
-    free(header);
-    exit(-1);
-  }*/
-
   return header;
 }
 
@@ -184,13 +172,9 @@ char *create_response(char *header, char *body, size_t body_size) {
 // Gets the response from the file provided by the url
 const char *get_response(char *url, size_t *file_size) {
   bool valid_response;
-  printf("test 1\n");
   char *file = read_file(file_size, url, &valid_response);
-  printf("test 2\n");
   char *header = create_header(file_size, url, &valid_response);
-  printf("test 3\n");
   char *result = create_response(header, file, *file_size);
-  printf("test 4\n");
   free(file);
   free(header);
 
@@ -204,14 +188,12 @@ void handle_client_request(int fd, struct pollfd *fds, int i,
   memset(buffer, 0, sizeof(buffer));
   ssize_t bytes_received;
   
-  printf("Trying to receive on: %d\n", fds[i].fd);
   bytes_received = recv(fds[i].fd, buffer, sizeof(buffer) - 1, 0);
   if (bytes_received < 0) {
     if (errno == EAGAIN || errno == EWOULDBLOCK) {
       return;
     }
     perror("recv() failed");
-   // *end_server = true;
     return;
   }
   if (bytes_received == 0) {
@@ -219,9 +201,6 @@ void handle_client_request(int fd, struct pollfd *fds, int i,
   }
 
   char *request_buffer = buffer;
-   
-  printf("REQUEST: %s\n", request_buffer);
-
   char *method = strsep(&request_buffer, " ");
   char *url = strsep(&request_buffer, " ");
   char *version = strsep(&request_buffer, "\r\n");
@@ -230,7 +209,6 @@ void handle_client_request(int fd, struct pollfd *fds, int i,
   size_t file_size;
   const char *file_result = get_response(url, &file_size);
   
-  printf("RESPONSE: %s\n", file_result);
   bytes_sent = send(fds[i].fd, file_result, strlen(file_result) + file_size, 0);
   free((void *)file_result);
 
