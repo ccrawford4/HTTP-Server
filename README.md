@@ -73,7 +73,7 @@ Unix/Linux `mv` commands, enabling you to serve that website.
 
    Choose the website you wish to serve. You can download it for offline access using `wget` with the following options:
    ```bash
-   wget --recursive --page-requisites --convert-links [website-url
+   wget --recursive --page-requisites --convert-links [website-url]
    ```
    ##### Disclaimer: 
     Ensure you have the appropriate permissions to download and use the content of the website. This code and its developers are not responsible for any unlawful download or distribution of copyrighted material. It is the user's responsibility to adhere to all applicable laws and regulations regarding website content usage.
